@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/journey/static/css/main.31d6cfe0.css",
-    "main.js": "/journey/static/js/main.4a32fa4f.js",
+    "main.js": "/journey/static/js/main.ce2bbe8b.js",
     "index.html": "/journey/index.html",
-    "main.4a32fa4f.js.map": "/journey/static/js/main.4a32fa4f.js.map"
+    "main.ce2bbe8b.js.map": "/journey/static/js/main.ce2bbe8b.js.map"
   },
   "entrypoints": [
     "static/css/main.31d6cfe0.css",
-    "static/js/main.4a32fa4f.js"
+    "static/js/main.ce2bbe8b.js"
   ]
 }
