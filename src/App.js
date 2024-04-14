@@ -9,15 +9,15 @@ export default function App() {
     <>
       <nav>
         <ul>
-          <li><Link to='/'>Home</Link></li>
-          <li><Link to='/analytics'>Analytics</Link></li>
-          <li><Link to='/add'>Add</Link></li>
+          <li><Link to='/journey/'>Home</Link></li>
+          <li><Link to='/journey/analytics'>Analytics</Link></li>
+          <li><Link to='/journey/add'>Add</Link></li>
         </ul>
       </nav>
       <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/analytics' element={<Analytics />}></Route>
-        <Route path='/add' element={<Add />}></Route>
+        <Route path='/journey/' element={<Home />}></Route>
+        <Route path='/journey/analytics' element={<Analytics />}></Route>
+        <Route path='/journey/add' element={<Add />}></Route>
       </Routes>
     </>
   )
