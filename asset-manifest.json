@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.css": "/journey/static/css/main.31d6cfe0.css",
-    "main.js": "/journey/static/js/main.ce2bbe8b.js",
+    "main.css": "/journey/static/css/main.8f6ff6d4.css",
+    "main.js": "/journey/static/js/main.dddc5895.js",
     "index.html": "/journey/index.html",
-    "main.ce2bbe8b.js.map": "/journey/static/js/main.ce2bbe8b.js.map"
+    "main.8f6ff6d4.css.map": "/journey/static/css/main.8f6ff6d4.css.map",
+    "main.dddc5895.js.map": "/journey/static/js/main.dddc5895.js.map"
   },
   "entrypoints": [
-    "static/css/main.31d6cfe0.css",
-    "static/js/main.ce2bbe8b.js"
+    "static/css/main.8f6ff6d4.css",
+    "static/js/main.dddc5895.js"
   ]
 }
