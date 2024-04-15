@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Home } from './pages/home';
+import './css/nav.css';
+import './css/general.css';
 import { Analytics } from './pages/analytics';
 import { Add } from './pages/add_data';
 
@@ -8,17 +9,16 @@ export default function App() {
   return (
     <>
       <nav>
-        <ul>
-          <li><Link to='/journey/'>Home</Link></li>
-          <li><Link to='/journey/analytics'>Analytics</Link></li>
-          <li><Link to='/journey/add'>Add</Link></li>
-        </ul>
+        <div><Link class='nav-item' to='/journey/'>Add Data</Link></div>
+        <div><Link class='nav-item' to='/journey/analytics'>Analytics</Link></div>
       </nav>
-      <Routes>
-        <Route path='/journey/' element={<Home />}></Route>
-        <Route path='/journey/analytics' element={<Analytics />}></Route>
-        <Route path='/journey/add' element={<Add />}></Route>
-      </Routes>
+      
+      <div class='content'>
+        <Routes>
+          <Route path='/journey/' element={<Add />}></Route>
+          <Route path='/journey/analytics' element={<Analytics />}></Route>
+        </Routes>
+      </div>
     </>
   )
 }
