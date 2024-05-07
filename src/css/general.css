@@ -1,23 +1,4 @@
 html {
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    font-family: Quicksand;
-}
-
-p, h1, h2, h3 {
-    color: white;
-}
-
-p {
-    font-family: Quicksand, sans-serif, Arial, Helvetica;
-    font-size: 20px;
-}
-
-.content {
-    position: absolute;
-    background-color: rgb(29, 33, 49);
-    margin-bottom: 0px;
+  scroll-behavior: smooth;
+  overflow: auto;
 }

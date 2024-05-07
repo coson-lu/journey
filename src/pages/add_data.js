@@ -1,22 +1,73 @@
-import '../css/analytics.css';
+import '../css/add.css';
+import { Typography, Box, TextField, Stack, ThemeProvider, createTheme, Button } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
+import SendIcon from '@mui/icons-material/Send';
+import { useEffect, useState } from 'react';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
+
 
 export function Add() {
-    return (
-        <>
-            <h1>This is add_data</h1>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta nibh venenatis cras sed felis eget velit aliquet. Nulla facilisi cras fermentum odio eu. Eu nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Morbi tempus iaculis urna id. In hac habitasse platea dictumst. Proin sed libero enim sed faucibus turpis in eu. Fermentum leo vel orci porta. Consequat interdum varius sit amet mattis vulputate. Tincidunt ornare massa eget egestas purus viverra accumsan in. Ridiculus mus mauris vitae ultricies leo integer malesuada nunc. Faucibus vitae aliquet nec ullamcorper sit amet risus. Accumsan lacus vel facilisis volutpat est velit egestas dui. Magna fringilla urna porttitor rhoncus. Pulvinar elementum integer enim neque. Vitae purus faucibus ornare suspendisse sed. Habitasse platea dictumst quisque sagittis purus sit amet volutpat. Malesuada proin libero nunc consequat. <br></br> <br></br>
+  const [activity, setActivity] = useState('')
+  const [time, setTime] = useState('')
+  
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(activity, time)
+  }
 
-            Amet volutpat consequat mauris nunc congue nisi vitae. Tellus integer feugiat scelerisque varius morbi enim nunc faucibus a. Nisl purus in mollis nunc sed id semper risus. Nunc mi ipsum faucibus vitae aliquet. Nec sagittis aliquam malesuada bibendum arcu vitae. Scelerisque viverra mauris in aliquam. Iaculis at erat pellentesque adipiscing. Viverra aliquet eget sit amet tellus cras adipiscing. Amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Elit eget gravida cum sociis. Arcu risus quis varius quam quisque id diam vel quam. Consectetur libero id faucibus nisl tincidunt eget nullam non nisi. Leo vel orci porta non pulvinar. Dui accumsan sit amet nulla facilisi morbi tempus. Tempus imperdiet nulla malesuada pellentesque elit eget gravida. Lectus sit amet est placerat in egestas erat. Semper eget duis at tellus at urna condimentum mattis. Turpis in eu mi bibendum neque egestas congue.<br></br> <br></br>
-
-            Malesuada fames ac turpis egestas sed. Consequat nisl vel pretium lectus. In vitae turpis massa sed elementum tempus egestas. Turpis cursus in hac habitasse platea. Amet consectetur adipiscing elit ut aliquam. Pellentesque adipiscing commodo elit at imperdiet dui. Ultricies tristique nulla aliquet enim. Est ultricies integer quis auctor elit sed vulputate mi sit. Dictumst quisque sagittis purus sit amet volutpat consequat. Ornare suspendisse sed nisi lacus sed viverra.<br></br> <br></br>
-
-            Quam adipiscing vitae proin sagittis. At varius vel pharetra vel turpis. Mi tempus imperdiet nulla malesuada pellentesque elit eget gravida. Sem integer vitae justo eget magna fermentum iaculis eu non. Egestas congue quisque egestas diam. A iaculis at erat pellentesque adipiscing. Massa sapien faucibus et molestie ac feugiat. Eu turpis egestas pretium aenean pharetra magna ac placerat vestibulum. Cras ornare arcu dui vivamus arcu felis bibendum ut. Lacus sed viverra tellus in hac habitasse platea. Nunc id cursus metus aliquam eleifend mi in nulla. Viverra ipsum nunc aliquet bibendum enim facilisis gravida. Tortor at auctor urna nunc id. Diam vulputate ut pharetra sit amet. Vitae congue eu consequat ac felis donec et. Augue interdum velit euismod in. Cum sociis natoque penatibus et magnis dis parturient montes nascetur.<br></br> <br></br>
-
-            Et pharetra pharetra massa massa ultricies mi quis hendrerit. Et molestie ac feugiat sed. Convallis a cras semper auctor neque vitae tempus quam. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Nibh praesent tristique magna sit. Risus in hendrerit gravida rutrum quisque non tellus orci. Nisi porta lorem mollis aliquam ut porttitor leo. Nunc pulvinar sapien et ligula ullamcorper malesuada proin. Orci nulla pellentesque dignissim enim sit. Quis imperdiet massa tincidunt nunc pulvinar sapien. Egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Lectus nulla at volutpat diam ut. Id interdum velit laoreet id donec ultrices tincidunt arcu. Vitae ultricies leo integer malesuada nunc. Sit amet commodo nulla facilisi nullam vehicula ipsum a. Molestie nunc non blandit massa enim nec. Massa enim nec dui nunc mattis enim. Dictumst vestibulum rhoncus est pellentesque. Eu facilisis sed odio morbi quis.<br></br> <br></br>
-
-            Aliquam malesuada bibendum arcu vitae elementum. Nisl condimentum id venenatis a condimentum vitae sapien pellentesque. Arcu odio ut sem nulla. Ut consequat semper viverra nam. Ornare suspendisse sed nisi lacus sed viverra tellus. Magna etiam tempor orci eu lobortis elementum nibh. Pretium viverra suspendisse potenti nullam ac tortor vitae purus. In iaculis nunc sed augue lacus viverra vitae congue. Pharetra et ultrices neque ornare aenean euismod elementum nisi. Non sodales neque sodales ut etiam sit amet nisl. Imperdiet proin fermentum leo vel orci. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt. Fermentum et sollicitudin ac orci phasellus egestas tellus rutrum. Tellus molestie nunc non blandit massa enim nec. Felis eget velit aliquet sagittis id consectetur.
-            </p>
-        </>
-    )
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        handleSubmit(event);
+      }
+    };
+  }, []);
+	return (
+		<>
+      {/* Text Boxes */}
+      <ThemeProvider theme={ darkTheme }>
+        <CssBaseline />
+        <Box
+          display="flex"
+          alignItems="center"
+          sx={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <form onSubmit={handleSubmit}>
+            <Stack direction='row' spacing={ 2 }>
+                <TextField
+                  label="Activity"
+                  variant="outlined"
+                  color='primary'
+                  autoFocus={ true }
+                  onChange={(e) => setActivity(e.target.value)}
+                  sx={{
+                    minWidth:'70rem'
+                  }}
+                  className='text-field'
+                ></TextField>
+                <TextField
+                  label="Time"
+                  variant="outlined"
+                  color='primary'
+                  onChange={(e) => setTime(e.target.value)}
+                  className='text-field'
+                ></TextField>
+                <Button variant="outlined" endIcon={<SendIcon />} className='text-field' type='submit'>Enter</Button>
+            </Stack>
+          </form>
+        </Box>
+      </ThemeProvider>
+		</>
+	)
 }
