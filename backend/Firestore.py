@@ -1,8 +1,8 @@
 import logging
 from typing import Optional
 from google.cloud import firestore
-import firebase_admin
-from firebase_admin import credentials, firestore
+import firebase_admin # type: ignore
+from firebase_admin import credentials, firestore # type: ignore
 
 cred = credentials.Certificate('./key.json')
 default_app = firebase_admin.initialize_app(cred)
