@@ -1,3 +1,4 @@
 from Firestore import FireStore
 
-FireStore.merge_document('data', '8-12-2024', {'read': 90})
+def Update(date: str, activity: str, time: int):
+    FireStore.merge_document(date, {activity: time})

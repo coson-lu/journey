@@ -13,11 +13,9 @@ logging.basicConfig(
 )
 
 class FireStore:
-    def stream_collection(
-        collection_id: str, filter=None, limit: int = -1
-    ) -> dict:
+    def stream_collection(filter=None, limit: int = -1) -> dict:
         try:
-            doc_ref = db.collection(collection_id)
+            doc_ref = db.collection('data')
             if filter:
                 doc_ref = doc_ref.where(filter=filter)
             if limit != -1:
@@ -27,12 +25,12 @@ class FireStore:
 
             if docs:
                 logging.info(
-                    f"Streamed collection {collection_id} in project {project_id}"
+                    f"Streamed collection {'data'}"
                 )
                 return docs
             else:
                 logging.warning(
-                    f"Collection {collection_id} does not exist in collection {collection_id}"
+                    f"Collection {'data'} does not exist in collection {'data'}"
                 )
                 return {}
         except Exception as e:
@@ -41,12 +39,12 @@ class FireStore:
             )
             raise
 
-    def upsert_document(collection_id: str, document_id: str, data: dict) -> None:
+    def upsert_document(document_id: str, data: dict) -> None:
         try:
-            doc_ref = db.collection(collection_id).document(document_id)
+            doc_ref = db.collection('data').document(document_id)
             doc_ref.set(data, merge=False)
             logging.info(
-                f"Document {document_id} upserted in collection {collection_id}"
+                f"Document {document_id} upserted in collection {'data'}"
             )
         except Exception as e:
             logging.error(
@@ -54,12 +52,12 @@ class FireStore:
             )
             raise
 
-    def merge_document(collection_id: str, document_id: str, data: dict) -> None:
+    def merge_document(document_id: str, data: dict) -> None:
         try:
-            doc_ref = db.collection(collection_id).document(document_id)
+            doc_ref = db.collection('data').document(document_id)
             doc_ref.set(data, merge=True)
             logging.info(
-                f"Document {document_id} merged in collection {collection_id}"
+                f"Document {document_id} merged in collection {'data'}"
             )
         except Exception as e:
             logging.error(
@@ -67,20 +65,20 @@ class FireStore:
             )
             raise
 
-    def read_document(project_id: str, collection_id: str, document_id: str) -> Optional[dict]:
+    def read_document(document_id: str) -> Optional[dict]:
         try:
             doc_ref = (
-                db.collection(collection_id).document(document_id)
+                db.collection('data').document(document_id)
             )
             doc = doc_ref.get()
             if doc.exists:
                 logging.info(
-                    f"Document {document_id} read from collection {collection_id} in project {project_id}"
+                    f"Document {document_id} read from collection {'data'}"
                 )
                 return doc.to_dict()
             else:
                 logging.warning(
-                    f"Document {document_id} does not exist in collection {collection_id}"
+                    f"Document {document_id} does not exist in collection {'data'}"
                 )
                 return None
         except Exception as e:
@@ -89,12 +87,12 @@ class FireStore:
             )
             raise
 
-    def update_document(collection_id: str, document_id: str, data: dict) -> None:
+    def update_document(document_id: str, data: dict) -> None:
         try:
-            doc_ref = db.collection(collection_id).document(document_id)
+            doc_ref = db.collection('data').document(document_id)
             doc_ref.update(data)
             logging.info(
-                f"Document {document_id} updated in collection {collection_id}"
+                f"Document {document_id} updated in collection {'data'}"
             )
         except Exception as e:
             logging.error(
@@ -102,12 +100,12 @@ class FireStore:
             )
             raise
 
-    def delete_document(collection_id: str, document_id: str) -> None:
+    def delete_document(document_id: str) -> None:
         try:
-            doc_ref = db.collection(collection_id).document(document_id)
+            doc_ref = db.collection('data').document(document_id)
             doc_ref.delete()
             logging.info(
-                f"Document {document_id} deleted from collection {collection_id}"
+                f"Document {document_id} deleted from collection {'data'}"
             )
         except Exception as e:
             logging.error(
