@@ -51,6 +51,35 @@ class FireStore:
                 f"An error occurred during document creation: {e}", exc_info=True
             )
             raise
+    
+    def coson_merge(document_id: str, activity: str, data: dict) -> None:
+        try:
+            doc_ref = db.collection('data').document(document_id)
+            doc = doc_ref.get()
+            if not doc.exists:
+                new_data = dict()
+                new_data[activity] = {'duration': data['duration']}
+                doc_ref.set(new_data, merge=True)
+            else:
+                doc = doc.to_dict()
+
+                if activity in doc:
+                    new_data = dict()
+                    data_dur, doc_dur = data['duration'], doc[activity]['duration']
+                    new_data[activity] = {'duration': data_dur + doc_dur}
+                    doc_ref.set(new_data, merge=True)
+                else:
+                    new_data = dict()
+                    new_data[activity] = {'duration': data['duration']}
+                    doc_ref.set(new_data, merge=True)
+            logging.info(
+                f"Document {document_id} totally merged"
+            )
+        except Exception as e:
+            logging.error(
+                f"An error occurred during document creation: {e}", exc_info=True
+            )
+            raise
 
     def merge_document(document_id: str, data: dict) -> None:
         try:
