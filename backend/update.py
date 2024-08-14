@@ -8,5 +8,3 @@ ref = {
 
 def Update(date: str, activity: str, duration: int):
     FireStore.coson_merge(date, activity, {'duration': duration})
-
-Update('8-15-2024', 'math', 30)

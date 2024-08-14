@@ -16,4 +16,8 @@ def current():
 
 @app.route('/update', methods=['POST'])
 def update_db():
-    pass
+    activity = request.form['activity']
+    duration = int(request.form['duration'])
+    
+    Update(current_date, activity, duration)
+    return {}, 200
