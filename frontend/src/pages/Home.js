@@ -44,16 +44,19 @@ function Home() {
 
   return (
     <>
-      {
-        activities.map((act, index) => (
-          <ActivityRow key={index} activity={act['activity']} duration={act['duration']}/>
-        ))
-      }
-      <form onSubmit={handleSubmit}>
-        <input></input>
-        <input></input>
-        <button type='submit'>Submit</button>
-      </form>
+      <h1>Home Page</h1>
+      <div>
+        {
+          activities.map((act, index) => (
+            <ActivityRow key={index} activity={act['activity']} duration={act['duration']}/>
+          ))
+        }
+        <form onSubmit={handleSubmit}>
+          <input></input>
+          <input></input>
+          <button type='submit'>Submit</button>
+        </form>
+      </div>
     </>
   );
 }
