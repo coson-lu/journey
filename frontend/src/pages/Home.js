@@ -6,7 +6,7 @@ function Home() {
   let [activities, setActivities] = useState([])
   const fetchActivities = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:5000/current");
+      const response = await axios.get("https://journey-backend.vercel.app/current");
       setActivities(response.data)
       const obj_keys = Object.keys(response.data)
       let temp = []
@@ -29,7 +29,7 @@ function Home() {
     e.preventDefault();
     const activity = e.target.elements[0].value;
     const duration = e.target.elements[1].value;
-    const url = 'http://127.0.0.1:5000/update';
+    const url = 'https://journey-backend.vercel.app/update';
     const formData = new FormData();
     formData.append('activity', activity);
     formData.append('duration', duration);
