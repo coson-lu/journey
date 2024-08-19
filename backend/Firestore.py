@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 import base64
 import json
 
-load_dotenv()
+load_dotenv('.env.local')
 
 
 key_json_base64 = os.getenv("FIRESTORE_KEY_JSON_BASE64")
