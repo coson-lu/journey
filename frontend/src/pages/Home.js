@@ -25,7 +25,7 @@ function Home() {
     // return () => clearInterval(interval);
   }, [])
   
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const activity = e.target.elements[0].value;
     const duration = e.target.elements[1].value;
@@ -38,8 +38,14 @@ function Home() {
             'content-type': 'multipart/form-data',
         },
     };
-    axios.post(url, formData, config)
-    fetchActivities();
+    
+    try {
+        await axios.post(url, formData, config);
+        // Wait for the post request to finish before fetching activities
+        await fetchActivities();
+    } catch (error) {
+        console.error("Error submitting form:", error);
+    }
   };
 
   return (
