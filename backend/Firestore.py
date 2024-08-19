@@ -3,8 +3,19 @@ from typing import Optional
 from google.cloud import firestore
 import firebase_admin # type: ignore
 from firebase_admin import credentials, firestore # type: ignore
+import os
+from dotenv import load_dotenv
+import base64
+import json
 
-cred = credentials.Certificate('./key.json')
+load_dotenv()
+
+
+key_json_base64 = os.getenv("FIRESTORE_KEY_JSON_BASE64")
+key_json = base64.b64decode(key_json_base64).decode('utf-8')
+key_dict = json.loads(key_json)
+
+cred = credentials.Certificate(key_dict)
 default_app = firebase_admin.initialize_app(cred)
 db = firestore.client()
 
