@@ -53,9 +53,13 @@ function Home() {
 
   return (
     <>
-      <h1>Home Page</h1>
       <div id='homepage-container'>
         <div id='activities-container'>
+          <div id='accomplishments-container'><h1 id='accomplishments-header'>Today's <span style={{color:'#4284ff'}}>Accomplishments</span></h1></div>
+          <div id='activities-header'>
+            <h2 id='activity-name'>Activity</h2>
+            <h2 id='activity-duration'>Duration</h2>
+          </div>
           {
             activities.map((act, index) => (
               <ActivityRow key={index} activity={act['activity']} duration={act['duration']} color={index}/>

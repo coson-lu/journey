@@ -10,3 +10,33 @@
   flex-direction: column;
   justify-content: center;
 }
+
+#activities-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 40vw;
+  margin-bottom: -15px;
+}
+
+#activity-name, #activity-duration {
+  font-size: 30px
+}
+
+#accomplishments-header {
+  font-size: 40px;
+  letter-spacing: 0.07em;
+  margin-bottom: 5px;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid;
+}
+
+#form-container {
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+}
