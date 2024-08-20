@@ -1,0 +1,12 @@
+#homepage-container {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  gap: 8vw
+}
+
+#activities-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

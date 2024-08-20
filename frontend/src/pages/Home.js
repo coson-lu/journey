@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ActivityRow from "../ActivityRow";
+import './home.css';
 
 function Home() {
   let [activities, setActivities] = useState([])
+
   const fetchActivities = async () => {
     try {
       const response = await axios.get("https://journey-backend.vercel.app/current");
@@ -18,6 +20,7 @@ function Home() {
       console.error("Error fetching problems:", error);
     }
   }
+
   useEffect(() => {
     
     fetchActivities();
@@ -34,9 +37,9 @@ function Home() {
     formData.append('activity', activity);
     formData.append('duration', duration);
     const config = {
-        headers: {
-            'content-type': 'multipart/form-data',
-        },
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
     };
     
     try {
@@ -51,17 +54,23 @@ function Home() {
   return (
     <>
       <h1>Home Page</h1>
-      <div>
-        {
-          activities.map((act, index) => (
-            <ActivityRow key={index} activity={act['activity']} duration={act['duration']}/>
-          ))
-        }
-        <form onSubmit={handleSubmit}>
-          <input></input>
-          <input></input>
-          <button type='submit'>Submit</button>
-        </form>
+      <div id='homepage-container'>
+        <div id='activities-container'>
+          {
+            activities.map((act, index) => (
+              <ActivityRow key={index} activity={act['activity']} duration={act['duration']}/>
+            ))
+          }
+        </div>
+        <div id='form-container'>
+          <form onSubmit={handleSubmit}>
+            <h1>Activity</h1>
+            <input></input>
+            <h1>Duration</h1>
+            <input></input>
+            <button type='submit'>Submit</button>
+          </form>
+        </div>
       </div>
     </>
   );

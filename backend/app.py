@@ -3,11 +3,13 @@ from flask_cors import CORS
 from Firestore import FireStore
 from update import Update
 from datetime import datetime
+from pytz import timezone
 
 app = Flask(__name__)
 CORS(app)
 
-y, m, d = str(datetime.now()).split()[0].split('-')
+tz = timezone("America/Los_Angeles")
+y, m, d = str(datetime.now(tz)).split()[0].split('-')
 current_date = f'{int(m)}-{d}-{y}'
 
 @app.route('/current')
