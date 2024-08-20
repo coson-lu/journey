@@ -1,7 +1,8 @@
 import './activityrow.css';
 
 function ActivityRow(props) {
-  const col = props.color % 1 === 0 ? '#036ffc' : '#000000'
+  const col = props.color % 2 === 0 ? '#4284ff' : '#ffffff'
+  console.log(props.color)
   return (
     <>
       <div className='row-container'>

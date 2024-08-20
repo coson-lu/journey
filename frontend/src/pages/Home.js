@@ -58,7 +58,7 @@ function Home() {
         <div id='activities-container'>
           {
             activities.map((act, index) => (
-              <ActivityRow key={index} activity={act['activity']} duration={act['duration']}/>
+              <ActivityRow key={index} activity={act['activity']} duration={act['duration']} color={index}/>
             ))
           }
         </div>
