@@ -55,7 +55,7 @@ function Home() {
     <>
       <div id='homepage-container'>
         <div id='activities-container'>
-          <div id='accomplishments-container'><h1 id='accomplishments-header'>Today's <span style={{color:'#4284ff'}}>Accomplishments</span></h1></div>
+          <div id='accomplishments-container'><h1 id='accomplishments-header'>Today's <span style={{color:'#48A3FF'}}>Accomplishments</span></h1></div>
           <div id='activities-header'>
             <h2 id='activity-name'>Activity</h2>
             <h2 id='activity-duration'>Duration</h2>
@@ -68,7 +68,7 @@ function Home() {
         </div>
         <div id='form-container'>
           <form onSubmit={handleSubmit}>
-            <h1 id='add-entry-text'>Add Entry</h1>
+            <h1 id='add-entry-text'>Add <span style={{color:'#48A3FF'}}>Entry</span></h1>
             <input type='text' placeholder='activity'></input>
             <input type='text' placeholder='duration'></input>
             <input type='submit' placeholder='submit'></input>
