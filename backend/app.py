@@ -3,7 +3,7 @@ from flask_cors import CORS
 from Firestore import FireStore
 from update import Update
 from datetime import datetime
-from pytz import timezone
+from pytz import timezone # type: ignore
 
 app = Flask(__name__)
 CORS(app)

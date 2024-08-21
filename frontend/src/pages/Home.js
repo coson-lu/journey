@@ -68,11 +68,10 @@ function Home() {
         </div>
         <div id='form-container'>
           <form onSubmit={handleSubmit}>
-            <h1>Activity</h1>
-            <input></input>
-            <h1>Duration</h1>
-            <input></input>
-            <button type='submit'>Submit</button>
+            <h1 id='add-entry-text'>Add Entry</h1>
+            <input type='text' placeholder='activity'></input>
+            <input type='text' placeholder='duration'></input>
+            <input type='submit' placeholder='submit'></input>
           </form>
         </div>
       </div>

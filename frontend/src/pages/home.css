@@ -1,14 +1,10 @@
-#homepage-container {
-  display: flex;
-  justify-content: center;
-  width: 100vw;
-  gap: 8vw
-}
-
 #activities-container {
+  float: left;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position:relative;
+  left:18%;
 }
 
 #activities-header {
@@ -25,18 +21,54 @@
 
 #accomplishments-header {
   font-size: 40px;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.065em;
   margin-bottom: 5px;
   text-align: center;
   padding-bottom: 10px;
   border-bottom: 2px solid;
 }
 
+
+/* FORM STYLES */
 #form-container {
+  position: fixed;
+  top: 50%; /* Position it halfway down the viewport */
+  right: 15%; /* Optional: Position it 20px from the right */
+  transform: translateY(-50%); /* Adjust its position to center it vertically */
   display: flex;
-  flex-direction: row;
-  height: fit-content;
-  position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
+  flex-direction: column;
+  width: 300px; /* Set a fixed width if needed */
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=text]:focus {
+  outline: 2px solid #4284ff;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4284ff;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #346cd3;
+}
+
+#add-entry-text {
+  margin-bottom: 5px;
 }
