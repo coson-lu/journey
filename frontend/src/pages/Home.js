@@ -5,7 +5,8 @@ import './home.css';
 
 function Home() {
   let [activities, setActivities] = useState([])
-
+  let [currentActivity, setCurrentActivity] = useState('')
+  let [currentDuration, setCurrentDuration] = useState('')
   const fetchActivities = async () => {
     try {
       const response = await axios.get("https://journey-backend.vercel.app/current");
@@ -30,12 +31,10 @@ function Home() {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const activity = e.target.elements[0].value;
-    const duration = e.target.elements[1].value;
     const url = 'https://journey-backend.vercel.app/update';
     const formData = new FormData();
-    formData.append('activity', activity);
-    formData.append('duration', duration);
+    formData.append('activity', currentActivity);
+    formData.append('duration', currentDuration);
     const config = {
       headers: {
         'content-type': 'multipart/form-data',
@@ -46,6 +45,9 @@ function Home() {
         await axios.post(url, formData, config);
         // Wait for the post request to finish before fetching activities
         await fetchActivities();
+
+        setCurrentActivity('');
+        setCurrentDuration('');
     } catch (error) {
         console.error("Error submitting form:", error);
     }
@@ -69,9 +71,9 @@ function Home() {
         <div id='form-container'>
           <form onSubmit={handleSubmit}>
             <h1 id='add-entry-text'>Add <span style={{color:'#48A3FF'}}>Entry</span></h1>
-            <input type='text' placeholder='activity'></input>
-            <input type='text' placeholder='duration'></input>
-            <input type='submit' placeholder='submit'></input>
+            <input type='text' placeholder='activity' value={currentActivity} onChange={(e) => setCurrentActivity(e.target.value)}/>
+            <input type='text' placeholder='duration' value={currentDuration} onChange={(e) => setCurrentDuration(e.target.value)}/>
+            <input type='submit' placeholder='submit'/>
           </form>
         </div>
       </div>
