@@ -1,7 +1,12 @@
+html {
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+}
+
 body {
   margin: 0;
+  padding: 0;
   background-color: rgb(14, 14, 14);
-  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6, p {

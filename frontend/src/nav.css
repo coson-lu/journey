@@ -1,0 +1,33 @@
+nav {
+  position: sticky;
+  z-index: 100;
+  top: 0px;
+  display: flex;
+  justify-content: center;
+  gap: 3%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 100%;
+  background-color: rgb(10, 10, 10);
+  transition: 350ms;
+}
+
+nav:hover {
+  border-bottom-left-radius: 30%;
+  border-bottom-right-radius: 30%;
+  padding-top: 22px;
+  padding-bottom: 22px;
+}
+
+.nav-item {
+  text-decoration: none;
+  font-family: Comfortaa;
+  padding: 5px 5px 5px 5px;
+  font-size: 15px;
+  color: rgb(230, 230, 230);
+  transition: 300ms;
+}
+
+.nav-item:hover {
+  color: #48A3FF;
+}

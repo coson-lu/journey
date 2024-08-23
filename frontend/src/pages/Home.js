@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ActivityRow from "../ActivityRow";
 import './home.css';
 
 function Home() {
+  const inputRef = useRef(null);
   let [activities, setActivities] = useState([])
   let [currentActivity, setCurrentActivity] = useState('')
   let [currentDuration, setCurrentDuration] = useState('')
@@ -25,6 +26,7 @@ function Home() {
   useEffect(() => {
     
     fetchActivities();
+    inputRef.current.focus();
     // const interval = setInterval(fetchActivities, 5000);
     // return () => clearInterval(interval);
   }, [])
@@ -48,6 +50,7 @@ function Home() {
 
         setCurrentActivity('');
         setCurrentDuration('');
+        inputRef.current.focus();
     } catch (error) {
         console.error("Error submitting form:", error);
     }
@@ -56,8 +59,10 @@ function Home() {
   return (
     <>
       <div id='homepage-container'>
+      
+        <div id='clear-fix'>
         <div id='activities-container'>
-          <div id='accomplishments-container'><h1 id='accomplishments-header'>Today's <span style={{color:'#48A3FF'}}>Accomplishments</span></h1></div>
+            <div id='accomplishments-container'><h1 id='accomplishments-header'>Today's <span style={{color:'#48A3FF'}}>Accomplishments</span></h1></div>
           <div id='activities-header'>
             <h2 id='activity-name'>Activity</h2>
             <h2 id='activity-duration'>Duration</h2>
@@ -68,10 +73,11 @@ function Home() {
             ))
           }
         </div>
+        </div>
         <div id='form-container'>
           <form onSubmit={handleSubmit}>
             <h1 id='add-entry-text'>Add <span style={{color:'#48A3FF'}}>Entry</span></h1>
-            <input type='text' placeholder='activity' value={currentActivity} onChange={(e) => setCurrentActivity(e.target.value)}/>
+            <input type='text' placeholder='activity' value={currentActivity} onChange={(e) => setCurrentActivity(e.target.value)} ref={inputRef}/>
             <input type='text' placeholder='duration' value={currentDuration} onChange={(e) => setCurrentDuration(e.target.value)}/>
             <input type='submit' placeholder='submit'/>
           </form>
