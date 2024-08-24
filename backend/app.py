@@ -28,3 +28,11 @@ def update_db():
     
     Update(current_date, activity, duration)
     return {}, 200
+
+@app.route('/all')
+def get_all_data():
+    all_data = FireStore.stream_collection()
+
+    return all_data
+
+    
