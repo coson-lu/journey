@@ -1,0 +1,82 @@
+.container {
+  margin-top: 15px;
+}
+.time-row {
+  flex: 0 1 auto;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.time-row button {
+  all: unset;
+  color: white;
+  transition: 200ms;
+  height: fit-content;
+  margin: auto 0 auto 0;
+}
+
+.time-row button:hover {
+  color: #a2c4e6;
+}
+
+.flex-container {
+  display: flex;
+  margin: 0 70px 0 70px;
+}
+
+.charts {
+  flex-grow: 1.5;
+  flex-basis: 0;
+}
+
+#pi-chart-container {
+  width: fit-content;
+  margin: auto;
+}
+
+.empty {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.time-frames {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  flex-basis: 0;
+  width: fit-content;
+  gap: 8px;
+}
+
+.time-button {
+  height: 40px;
+  font-family: Comfortaa;
+  background-color: rgb(18, 18, 18);
+  border: none;
+  color: #828a93;
+  border-radius: 10px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: 100ms;
+}
+
+.time-button:hover {
+  background-color: #2e2e2e;
+  cursor: pointer;
+}
+
+.selected {
+  height: 40px;
+  font-family: Comfortaa;
+  background-color: #358ee8;
+  border: none;
+  color: #c7c7c7;
+  border-radius: 10px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: 100ms;
+}
