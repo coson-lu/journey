@@ -9,7 +9,6 @@ const formatDate = (date) => {
   let day = date.getDate();
   const year = date.getFullYear();
   if (day.toString().length == 1) {
-    console.log('YES')
     day = '0' + day.toString()
   } 
 
@@ -47,7 +46,6 @@ let time_frames = {
       wantedData.push(data[formatted])
       wantedDays.push(formatted)
     }
-    console.log(wantedDays)
     return {data: wantedData, days: wantedDays, first: first, last: last}
   },
   month: (data, monthsBack) => {
@@ -69,6 +67,21 @@ let time_frames = {
       wantedDays.push(formatted)
     }
     return {data: wantedData, days: wantedDays, first: first, last: last}
+  },
+  year: (data, monthsBack) => {
+    let wantedDays = [];
+    let wantedData = [];
+    let date = new Date(formatedDate[3] - monthsBack, 0, 1); // Start from January 1st
+    let last = date;
+    while (date.getFullYear() === formatedDate[3] - monthsBack) {
+      let x = new Date(date)
+      wantedDays.push(formatDate(x)[0]); // Add the current date to the array
+      wantedData.push(data[formatDate(x)[0]])
+      
+      last = date
+      date.setDate(date.getDate() + 1); // Move to the next day
+    }
+    return {data: wantedData, days: wantedDays, first: new Date(formatedDate[3] - monthsBack, 0, 1), last: last};
   },
   all_time: []
 }
