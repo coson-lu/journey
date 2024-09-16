@@ -3,6 +3,11 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import './analytics.css'
 
+const months = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+
 // Formats date to MM/DD/YYYY
 const formatDate = (date) => {
   const month = date.getMonth() + 1;
@@ -46,7 +51,11 @@ let time_frames = {
       wantedData.push(data[formatted])
       wantedDays.push(formatted)
     }
-    return {data: wantedData, days: wantedDays, first: first, last: last}
+
+    let f = first.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    let l = last.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    return {data: wantedData, days: wantedDays, message: `${f} to ${l}`, first: first, last: last}
   },
   month: (data, monthsBack) => {
     let beginning = new Date(formatedDate[3], formatedDate[1] - monthsBack - 1, 1);
@@ -66,7 +75,7 @@ let time_frames = {
       wantedData.push(data[formatted])
       wantedDays.push(formatted)
     }
-    return {data: wantedData, days: wantedDays, first: first, last: last}
+    return {data: wantedData, days: wantedDays, message: `${months[beginning.getMonth()]} ${beginning.getFullYear()}`,first: first, last: last}
   },
   year: (data, monthsBack) => {
     let wantedDays = [];
@@ -81,7 +90,7 @@ let time_frames = {
       last = date
       date.setDate(date.getDate() + 1); // Move to the next day
     }
-    return {data: wantedData, days: wantedDays, first: new Date(formatedDate[3] - monthsBack, 0, 1), last: last};
+    return {data: wantedData, days: wantedDays, message: `Year of ${date.getFullYear() - 1}`, first: new Date(formatedDate[3] - monthsBack, 0, 1), last: last};
   },
   all_time: []
 }
@@ -193,17 +202,13 @@ function Analytics() {
   useEffect(() => {
     fetchAllActivities();
   }, []);
-  
+  console.log(time_frames[timeFrame](allData, timeBack)['data'].some(x => x != null))
   useEffect(() => {
-    if (Object.keys(allData).length !== 0) {
+    if (time_frames[timeFrame](allData, timeBack)['data'].some(x => x != null)) {
       let x = getPiChartData(time_frames[timeFrame](allData, timeBack)['data']);
       displayPiChart(x);
     }
   }, [allData, timeBack, timeFrame]);
-  
-
-  let f = time_frames[timeFrame](allData, timeBack)['first'].toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  let l = time_frames[timeFrame](allData, timeBack)['last'].toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
   return (
     <>
@@ -212,7 +217,7 @@ function Analytics() {
         <button title='Back'onClick={() => {
           setTimeBack(timeBack + 1)
         }}>◄</button>
-        <h3>{f} to {l}</h3>
+        <h3>{time_frames[timeFrame](allData, timeBack)['message']}</h3>
         {timeBack == 0 ? (
           <div></div>
         ) : (
@@ -243,9 +248,13 @@ function Analytics() {
           }}>Year</button>
         </div>
         <div class='charts'>
-          <div id='pi-chart-container'>
-            <div id="pi-chart"></div>
-          </div>
+          {time_frames[timeFrame](allData, timeBack)['data'].some(x => x != null) ? (
+            <div id='pi-chart-container'>
+              <div id="pi-chart"></div>
+            </div>
+          ) : (
+            <h3>No data for this {timeFrame}!</h3>
+          )}
         </div>
         <div class='empty'></div>
       </div>
