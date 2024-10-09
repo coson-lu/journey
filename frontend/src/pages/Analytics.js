@@ -2,14 +2,15 @@ import Highcharts from 'highcharts';
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import './analytics.css'
+import HeatMap from '@uiw/react-heat-map';
 
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
-// Formats date to MM/DD/YYYY
-const formatDate = (date) => {
+// Formats date to MM-DD-YYYY
+const mmddyyyy = (date) => {
   const month = date.getMonth() + 1;
   let day = date.getDate();
   const year = date.getFullYear();
@@ -23,7 +24,7 @@ const formatDate = (date) => {
 }
 
 const currentDate = new Date()
-const formatedDate = formatDate(currentDate)
+const formatedDate = mmddyyyy(currentDate)
 
 
 
@@ -46,7 +47,7 @@ let time_frames = {
         last = n
       }
 
-      let formatted = formatDate(n)[0]
+      let formatted = mmddyyyy(n)[0]
 
       wantedData.push(data[formatted])
       wantedDays.push(formatted)
@@ -68,7 +69,7 @@ let time_frames = {
     let last = new Date();
     for (let i = 0; i < numDays; i++) {
       let n = new Date(beginning.getFullYear(), beginning.getMonth(), beginning.getDate() + i)
-      let formatted = formatDate(n)[0]
+      let formatted = mmddyyyy(n)[0]
       if (i == numDays - 1) {
         last = n
       }
@@ -84,8 +85,8 @@ let time_frames = {
     let last = date;
     while (date.getFullYear() === formatedDate[3] - monthsBack) {
       let x = new Date(date)
-      wantedDays.push(formatDate(x)[0]); // Add the current date to the array
-      wantedData.push(data[formatDate(x)[0]])
+      wantedDays.push(mmddyyyy(x)[0]); // Add the current date to the array
+      wantedData.push(data[mmddyyyy(x)[0]])
       
       last = date
       date.setDate(date.getDate() + 1); // Move to the next day
@@ -121,7 +122,9 @@ let getPiChartData = (data) => {
       pcData.push({name: key, y: parseFloat((percentage * 100).toFixed(2))})
     }
   }
-  pcData.push({name: 'other', y: parseFloat((other / total * 100).toFixed(2))})
+  if (other > 0) {
+    pcData.push({name: 'other', y: parseFloat((other / total * 100).toFixed(2))})
+  }
   return pcData
 }
 
@@ -178,13 +181,18 @@ let displayPiChart = (d) => {
   });
 }
 
-
+// let getHeatMapData = (data, times) => {
+//   for (let i = 0; i < data.length; i++) {
+    
+//   }
+// }
 
 function Analytics() {
   let [allData, setAllData] = useState({})
   let [timeFrame, setTimeFrame] = useState('week')
   let [timeBack, setTimeBack] = useState(0)
   let [activeButton, setActiveButton] = useState(1)
+  // let [heatBack, setHeatBack] = useState(0)
 
   const fetchAllActivities = async () => {
     try {
@@ -202,7 +210,8 @@ function Analytics() {
   useEffect(() => {
     fetchAllActivities();
   }, []);
-  console.log(time_frames[timeFrame](allData, timeBack)['data'].some(x => x != null))
+
+  // Pie Chart
   useEffect(() => {
     if (time_frames[timeFrame](allData, timeBack)['data'].some(x => x != null)) {
       let x = getPiChartData(time_frames[timeFrame](allData, timeBack)['data']);
@@ -210,56 +219,69 @@ function Analytics() {
     }
   }, [allData, timeBack, timeFrame]);
 
+  // // Heat Map
+  // useEffect(() => {
+    
+  //   let x = getPiChartData(time_frames[timeFrame](allData, timeBack)['data']);
+  //   displayHeatMap(x);
+  // }, [allData, timeBack, timeFrame]);
+
   return (
     <>
-    <div class='container'>
-      <div class='time-row'>
-        <button title='Back'onClick={() => {
-          setTimeBack(timeBack + 1)
-        }}>◄</button>
-        <h3>{time_frames[timeFrame](allData, timeBack)['message']}</h3>
-        {timeBack == 0 ? (
-          <div></div>
-        ) : (
-          <button title='Forward' onClick={() => {
-            setTimeBack(timeBack - 1)
-          }}>►</button>
-        )}
-      </div>
-      <div class='flex-container'>
-        <div class='time-frames'>
-          <button className={activeButton === 1 ? "selected" : "time-button"}
- onClick={() => {
-            setTimeFrame('week')
-            setTimeBack(0)
-            handleButtonClick(1)
-          }}>Week</button>
-          <button className={activeButton === 2 ? "selected" : "time-button"}
- onClick={() => {
-            setTimeFrame('month')
-            setTimeBack(0)
-            handleButtonClick(2)
-          }}>Month</button>
-          <button className={activeButton === 3 ? "selected" : "time-button"}
- onClick={() => {
-            setTimeFrame('year')
-            setTimeBack(0)
-            handleButtonClick(3)
-          }}>Year</button>
-        </div>
-        <div class='charts'>
-          {time_frames[timeFrame](allData, timeBack)['data'].some(x => x != null) ? (
-            <div id='pi-chart-container'>
-              <div id="pi-chart"></div>
+    <div class='scroll-container'>
+      <section>
+        <div class='container'>
+          <div class='time-row'>
+            <button title='Back'onClick={() => {
+              setTimeBack(timeBack + 1)
+            }}>◄</button>
+            <h3>{time_frames[timeFrame](allData, timeBack)['message']}</h3>
+            {timeBack == 0 ? (
+              <div></div>
+            ) : (
+              <button title='Forward' onClick={() => {
+                setTimeBack(timeBack - 1)
+              }}>►</button>
+            )}
+          </div>
+          <div class='flex-container'>
+            <div class='time-frames'>
+              <button className={activeButton === 1 ? "selected" : "time-button"}
+    onClick={() => {
+                setTimeFrame('week')
+                setTimeBack(0)
+                handleButtonClick(1)
+              }}>Week</button>
+              <button className={activeButton === 2 ? "selected" : "time-button"}
+    onClick={() => {
+                setTimeFrame('month')
+                setTimeBack(0)
+                handleButtonClick(2)
+              }}>Month</button>
+              <button className={activeButton === 3 ? "selected" : "time-button"}
+    onClick={() => {
+                setTimeFrame('year')
+                setTimeBack(0)
+                handleButtonClick(3)
+              }}>Year</button>
             </div>
-          ) : (
-            <h3>No data for this {timeFrame}!</h3>
-          )}
+            <div class='charts'>
+              {time_frames[timeFrame](allData, timeBack)['data'].some(x => x != null) ? (
+                <div id='pi-chart-container'>
+                  <div id="pi-chart"></div>
+                </div>
+              ) : (
+                <h3>No data for this {timeFrame}!</h3>
+              )}
+            </div>
+            <div class='empty'></div>
+          </div>
+          
         </div>
-        <div class='empty'></div>
-      </div>
-      
+      </section>
     </div>
+    
+    
     
     
     </>
