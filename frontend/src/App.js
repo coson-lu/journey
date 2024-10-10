@@ -34,8 +34,8 @@ function App() {
           <div class='password-container'>
             <form onSubmit={handleSubmit}>
               <h1 id='password-prompt'>Enter password for website access: </h1>
-              <input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}/>
-              <input type='submit' placeholder='submit'/>
+              <input id='password-input' type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+              <input id='password-submit' type='submit' placeholder='submit'/>
             </form>
           </div>
           <div class='big-password-container'>
