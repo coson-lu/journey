@@ -48,7 +48,7 @@
   z-index: 50;
 }
 
-input[type=text] {
+input[type=password] {
   width: 100%;
   padding: 12px 15px;
   margin: 8px 0;
@@ -60,7 +60,7 @@ input[type=text] {
   color: white;
 }
 
-input[type=text]:focus {
+input[type=password]:focus {
   outline: 2px solid #48A3FF;
 }
 
