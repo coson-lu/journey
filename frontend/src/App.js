@@ -11,14 +11,14 @@ function App() {
   let handleSubmit = () => {
     if (password === process.env.REACT_APP_PASSWORD) {
       setAccess(true)
-      localStorage.setItem('signedIn', 'ultimate secret token')
+      localStorage.setItem('signedIn', process.env.REACT_APP_PASSWORD)
     }
   }
   let x = (value, istart, istop, ostart, ostop) => ostart + (ostop - ostart) * ((value - istart) / (istop - istart))
   
   return (
     <>
-      {access === true || localStorage.getItem('signedIn') == 'ultimate secret token' ? (
+      {access === true || localStorage.getItem('signedIn') == process.env.REACT_APP_PASSWORD ? (
         <>
           <nav>
             <Link to='/' class='nav-item'>Home</Link>
