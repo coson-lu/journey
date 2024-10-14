@@ -11,13 +11,14 @@ function App() {
   let handleSubmit = () => {
     if (password === process.env.REACT_APP_PASSWORD) {
       setAccess(true)
+      localStorage.setItem('signedIn', 'ultimate secret token')
     }
   }
   let x = (value, istart, istop, ostart, ostop) => ostart + (ostop - ostart) * ((value - istart) / (istop - istart))
   
   return (
     <>
-      {access === true ? (
+      {access === true || localStorage.getItem('signedIn') == 'ultimate secret token' ? (
         <>
           <nav>
             <Link to='/' class='nav-item'>Home</Link>
@@ -41,11 +42,10 @@ function App() {
           <div class='big-password-container'>
             {Array.from({ length: (1800 - 450) }, (_, index) => {
               const i = 1800 - index;
-              console.log(i);
               return (
                 <div key={i} style={{ width: i + 'px', height: i + 'px', transform: 'rotate(45deg) ', backgroundColor: `rgb(${x(i, 450, 1800, 27, 18)}, ${x(i, 450, 1800, 27, 18)}, ${x(i, 450, 1800, 50, 18)})`, position: 'absolute', top: `calc(50% - (${i / 2}px))`, left: `calc(50% - (${i / 2}px))`, 'borderRadius': `${x(i, 450, 1800, 80, 300)}px`, 'zIndex': -50000}}>
                 </div>
-              ); // USE P5 MAP function!
+              );
             })}
           </div>
         </>

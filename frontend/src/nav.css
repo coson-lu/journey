@@ -4,8 +4,9 @@ nav {
   top: 0px;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 3%;
-  padding: 20px 0 20px 0;
+  height: 70px;
   width: 100%;
   transition: 350ms;
   background-color: #2d81d4;

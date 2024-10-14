@@ -19,6 +19,8 @@
 #activity-name, #activity-duration {
   font-size: 28px;
   letter-spacing: 0.025em;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 #accomplishments-header {
@@ -28,7 +30,6 @@
   text-align: center;
   padding-bottom: 10px;
   border-bottom: 2px solid;
-  
 }
 #clear-fix::after {
   content: "";
@@ -61,7 +62,8 @@ input[type=text] {
 }
 
 input[type=text]:focus {
-  outline: 2px solid #48A3FF;
+  outline: 1px solid #48A3FF;
+  box-shadow: 0 0 8px #48A3FF;
 }
 
 input[type=submit] {
@@ -73,6 +75,7 @@ input[type=submit] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  box-shadow: 0 0 10px #2d81d4;
 }
 
 input[type=submit]:hover {
@@ -81,4 +84,13 @@ input[type=submit]:hover {
 
 #add-entry-text {
   margin-bottom: 5px;
+}
+
+#activity-scroll-control {
+  height: 56vh;
+  overflow-y: auto;
+}
+
+#activity-scroll-control::-webkit-scrollbar {
+  width: 7px;
 }

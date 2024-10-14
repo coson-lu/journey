@@ -27,7 +27,6 @@ const currentDate = new Date()
 const formatedDate = mmddyyyy(currentDate)
 
 
-
 // *TIME FRAMES
 let time_frames = {
   week: (data, weeksBack) => {
@@ -116,7 +115,7 @@ let getPiChartData = (data) => {
   let other = 0
   for (const [key, value] of Object.entries(act)) {
     let percentage = (value / total)
-    if (percentage < 0.030) {
+    if (percentage < 0.02) {
       other += value
     } else {
       pcData.push({name: key, y: parseFloat((percentage * 100).toFixed(2))})
@@ -132,44 +131,52 @@ let displayPiChart = (d) => {
   Highcharts.chart('pi-chart', {
     chart: {
       type: 'pie',
-      width: 500,
-      backgroundColor: 'rgb(18, 18, 18)',
+      height: '460px',
+      backgroundColor: 'rgb(18, 18, 18, 0)',
     },
     title: {
       text: 'Activities Pie Chart',
       style: {
-        color: '#48A3FF'
+        color: '#66b0fa',
+        'textShadow': '0 0 7px #66b0fa',
+        letterSpacing: '0.025em'
       }
     },
     credits: {
-        enabled: false
+      enabled: false
     },
     tooltip: {
-        valueSuffix: '%'
+      valueSuffix: '%'
     },
     plotOptions: {
-        series: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: [{
-                enabled: true,
-                distance: 20
-            }, {
-                enabled: true,
-                distance: -40,
-                format: '{point.percentage:.1f}%',
-                style: {
-                    fontSize: '1.2em',
-                    textOutline: 'none',
-                    opacity: 0.7
-                },
-                filter: {
-                    operator: '>',
-                    property: 'percentage',
-                    value: 10
-                }
-            }]
-        }
+      series: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: [{
+          enabled: true,
+          distance: 20,
+          style: {
+            backgroundColor: 'rgb(0, 0, 0, 0)',
+            textOutline: 'none',
+            color: 'white',
+            fontFamily: 'Comfortaa'
+          }
+        }, {
+          enabled: true,
+          distance: -40,
+          format: '{point.percentage:.1f}%',
+          style: {
+            fontSize: '1.2em',
+            textOutline: 'none',
+            opacity: 0.7
+          },
+          filter: {
+            operator: '>',
+            property: 'percentage',
+            value: 10
+          }
+        }]
+      }
     },
     series: [
       {
@@ -228,62 +235,56 @@ function Analytics() {
 
   return (
     <>
-    <div class='scroll-container'>
-      <section>
-        <div class='container'>
-          <div class='time-row'>
-            <button title='Back'onClick={() => {
-              setTimeBack(timeBack + 1)
-            }}>◄</button>
-            <h3>{time_frames[timeFrame](allData, timeBack)['message']}</h3>
-            {timeBack == 0 ? (
-              <div></div>
-            ) : (
-              <button title='Forward' onClick={() => {
-                setTimeBack(timeBack - 1)
-              }}>►</button>
-            )}
-          </div>
-          <div class='flex-container'>
-            <div class='time-frames'>
-              <button className={activeButton === 1 ? "selected" : "time-button"}
-    onClick={() => {
-                setTimeFrame('week')
-                setTimeBack(0)
-                handleButtonClick(1)
-              }}>Week</button>
-              <button className={activeButton === 2 ? "selected" : "time-button"}
-    onClick={() => {
-                setTimeFrame('month')
-                setTimeBack(0)
-                handleButtonClick(2)
-              }}>Month</button>
-              <button className={activeButton === 3 ? "selected" : "time-button"}
-    onClick={() => {
-                setTimeFrame('year')
-                setTimeBack(0)
-                handleButtonClick(3)
-              }}>Year</button>
-            </div>
-            <div class='charts'>
-              {time_frames[timeFrame](allData, timeBack)['data'].some(x => x != null) ? (
-                <div id='pi-chart-container'>
-                  <div id="pi-chart"></div>
-                </div>
-              ) : (
-                <h3>No data for this {timeFrame}!</h3>
-              )}
-            </div>
-            <div class='empty'></div>
-          </div>
-          
+    <section className='chart-section'>
+      <div className='time-row'>
+        <h3 className='backButton' title='Back' onClick={() => {
+          setTimeBack(timeBack + 1)
+        }}>🡸</h3>
+
+        <h3>{time_frames[timeFrame](allData, timeBack)['message']}</h3>
+
+        {timeBack == 0 ? (
+          <div></div>
+        ) : (
+          <h3 className='backButton' title='Forward' onClick={() => {
+            setTimeBack(timeBack - 1)
+          }}>🡺</h3>
+        )}
+      </div>
+      <div className='flex-container'>
+        <div className='time-frames'>
+          <button className={activeButton === 1 ? "selected" : "time-button"}
+onClick={() => {
+            setTimeFrame('week')
+            setTimeBack(0)
+            handleButtonClick(1)
+          }}>Week</button>
+          <button className={activeButton === 2 ? "selected" : "time-button"}
+onClick={() => {
+            setTimeFrame('month')
+            setTimeBack(0)
+            handleButtonClick(2)
+          }}>Month</button>
+          <button className={activeButton === 3 ? "selected" : "time-button"}
+onClick={() => {
+            setTimeFrame('year')
+            setTimeBack(0)
+            handleButtonClick(3)
+          }}>Year</button>
         </div>
-      </section>
-    </div>
-    
-    
-    
-    
+        <div className='charts'>
+          {time_frames[timeFrame](allData, timeBack)['data'].some(x => x != null) ? (
+            <div id='pi-chart-container'>
+              <div id="pi-chart"></div>
+            </div>
+          ) : (
+            <h3>No data for this {timeFrame}!</h3>
+          )}
+        </div>
+        <div className='empty'></div>
+      </div>
+    </section>
+    {/* use <section> tag to create more sections */}
     </>
   );
 }

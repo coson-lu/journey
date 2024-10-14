@@ -61,21 +61,24 @@ function Home() {
       <div id='homepage-container'>
         <div id='clear-fix'>
           <div id='activities-container'>
-              <div id='accomplishments-container'><h1 id='accomplishments-header'>Today's <span style={{color:'#48A3FF'}}>Accomplishments</span></h1></div>
+              <div id='accomplishments-container'><h1 id='accomplishments-header'>Today's <span style={{color:'#48A3FF', 'textShadow': '0 0 7px #48A3FF'}}>Accomplishments</span></h1></div>
             <div id='activities-header'>
               <h2 id='activity-name'>Activity</h2>
               <h2 id='activity-duration'>Duration</h2>
             </div>
-            {
-              activities.map((act, index) => (
-                <ActivityRow key={index} activity={act['activity']} duration={act['duration']} color={index}/>
-              ))
-            }
+            <div id='activity-scroll-control'>
+              {
+                activities.map((act, index) => (
+                  <ActivityRow key={index} activity={act['activity']} duration={act['duration']} color={index}/>
+                ))
+              }
+            </div>
+            
           </div>
         </div>
         <div id='form-container'>
           <form onSubmit={handleSubmit}>
-            <h1 id='add-entry-text'>Add <span style={{color:'#48A3FF'}}>Entry</span></h1>
+            <h1 id='add-entry-text'>Add <span style={{color:'#48A3FF', 'textShadow': '0 0 7px #48A3FF'}}>Entry</span></h1>
             <input type='text' placeholder='activity' value={currentActivity} onChange={(e) => setCurrentActivity(e.target.value)} ref={inputRef}/>
             <input type='text' placeholder='duration' value={currentDuration} onChange={(e) => setCurrentDuration(e.target.value)}/>
             <input type='submit' placeholder='submit'/>
