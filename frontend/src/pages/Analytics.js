@@ -131,7 +131,7 @@ let displayPiChart = (d) => {
   Highcharts.chart('pi-chart', {
     chart: {
       type: 'pie',
-      height: '460px',
+      height: '75%',
       backgroundColor: 'rgb(18, 18, 18, 0)',
     },
     title: {
