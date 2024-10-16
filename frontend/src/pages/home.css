@@ -94,3 +94,15 @@ input[type=submit]:hover {
 #activity-scroll-control::-webkit-scrollbar {
   width: 7px;
 }
+
+.spinner {
+  text-align: center;
+  font-size: 1.5em;
+  padding: 20px;
+  position: absolute;
+  color: white;
+  display: flex;
+  left: 50%;
+  top: 50%;
+  font-family: Comfortaa, Raleway, Nunito;
+}
