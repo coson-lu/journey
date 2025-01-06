@@ -69,7 +69,11 @@ function Home() {
             </div>
             <div id='activity-scroll-control'>
               {loading &&
-                <div className="spinner">Loading...</div>
+                <>
+                  <div className="loader-container">
+                    <div className='loading loader'></div>
+                  </div>
+                </>
               }
               {
                 activities.map((act, index) => (

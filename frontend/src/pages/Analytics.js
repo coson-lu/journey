@@ -284,6 +284,9 @@ onClick={() => {
         <div className='empty'></div>
       </div>
     </section>
+    <section>
+      <h1>test</h1>
+    </section>
     {/* use <section> tag to create more sections */}
     </>
   );
