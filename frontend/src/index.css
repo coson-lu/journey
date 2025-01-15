@@ -1,6 +1,7 @@
 html {
   overflow-y: auto;
   overflow-x: hidden;
+  font-family: 'Comfortaa', 'Raleway', 'Nunito';
 }
 
 body {
@@ -19,6 +20,10 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   font-family: 'Comfortaa', 'Raleway', 'Nunito';
+}
+
+a {
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar {

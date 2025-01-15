@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import './analytics.css'
 import HeatMap from '@uiw/react-heat-map';
+import ApiService from "../Api";
 
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -203,8 +204,8 @@ function Analytics() {
 
   const fetchAllActivities = async () => {
     try {
-      const response = await axios.get("https://journey-backend.vercel.app/all");
-      await setAllData(response.data)
+      const data = await ApiService.getAllData();
+      await setAllData(data)
     } catch (error) {
       console.error("Error fetching problems:", error);
     }

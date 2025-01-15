@@ -3,13 +3,32 @@ nav {
   z-index: 100;
   top: 0px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 3%;
   height: 70px;
   width: 100%;
   transition: 350ms;
   background-color: #2d81d4;
+}
+
+.center-group {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Space between the centered elements */
+}
+
+.spacer {
+  flex: 1;
+}
+
+.right-group {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2vw;
+  margin-left: -2vw;
 }
 
 .nav-item {

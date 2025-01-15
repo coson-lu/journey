@@ -2,28 +2,29 @@ import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import ActivityRow from "../ActivityRow";
 import './home.css';
+import ApiService from "../Api";
 
 function Home() {
   const inputRef = useRef(null);
   let [activities, setActivities] = useState([]);
   let [currentActivity, setCurrentActivity] = useState('');
   let [currentDuration, setCurrentDuration] = useState('');
-  let [loading, setLoading] = useState(false); // Add loading state
+  let [loading, setLoading] = useState(false);
 
   const fetchActivities = async () => {
-    setLoading(true); // Set loading to true when starting the fetch
+    setLoading(true);
     try {
-      const response = await axios.get("https://journey-backend.vercel.app/current");
-      const obj_keys = Object.keys(response.data);
+      const data = await ApiService.getCurrentData();
+      const obj_keys = Object.keys(data);
       let temp = [];
       obj_keys.forEach(element => {
-        temp.push({ 'activity': element, 'duration': response.data[element]['duration'] });
+        temp.push({ 'activity': element, 'duration': data[element]['duration'] });
       });
       setActivities(temp);
     } catch (error) {
       console.error("Error fetching problems:", error);
     } finally {
-      setLoading(false); // Set loading to false when fetch is done
+      setLoading(false);
     }
   };
 
@@ -35,18 +36,10 @@ function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const url = 'https://journey-backend.vercel.app/update';
-    const formData = new FormData();
-    formData.append('activity', currentActivity);
-    formData.append('duration', currentDuration);
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    };
     
     try {
-      await axios.post(url, formData, config);
-      await fetchActivities(); // Fetch activities after submission
+      const data = await ApiService.updateData(currentActivity, currentDuration);
+      await fetchActivities();
       setCurrentActivity('');
       setCurrentDuration('');
       inputRef.current.focus();

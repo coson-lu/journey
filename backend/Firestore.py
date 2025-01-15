@@ -10,7 +10,6 @@ import json
 
 load_dotenv('.env.local')
 
-
 key_json_base64 = os.getenv("FIRESTORE_KEY_JSON_BASE64")
 key_json = base64.b64decode(key_json_base64).decode('utf-8')
 key_dict = json.loads(key_json)
@@ -24,9 +23,9 @@ logging.basicConfig(
 )
 
 class FireStore:
-    def stream_collection(filter=None, limit: int = -1) -> dict:
+    def stream_collection(user_ID: str, filter=None, limit: int=-1) -> dict:
         try:
-            doc_ref = db.collection('data')
+            doc_ref = db.collection(user_ID)
             if filter:
                 doc_ref = doc_ref.where(filter=filter)
             if limit != -1:
@@ -50,9 +49,9 @@ class FireStore:
             )
             raise
 
-    def upsert_document(document_id: str, data: dict) -> None:
+    def upsert_document(user_ID: str, document_id: str, data: dict) -> None:
         try:
-            doc_ref = db.collection('data').document(document_id)
+            doc_ref = db.collection(user_ID).document(document_id)
             doc_ref.set(data, merge=False)
             logging.info(
                 f"Document {document_id} upserted in collection {'data'}"
@@ -63,9 +62,9 @@ class FireStore:
             )
             raise
     
-    def coson_merge(document_id: str, activity: str, data: dict) -> None:
+    def coson_merge(user_ID: str, document_id: str, activity: str, data: dict) -> None:
         try:
-            doc_ref = db.collection('data').document(document_id)
+            doc_ref = db.collection(user_ID).document(document_id)
             doc = doc_ref.get()
             if not doc.exists:
                 new_data = dict()
@@ -92,9 +91,9 @@ class FireStore:
             )
             raise
 
-    def merge_document(document_id: str, data: dict) -> None:
+    def merge_document(user_ID: str, document_id: str, data: dict) -> None:
         try:
-            doc_ref = db.collection('data').document(document_id)
+            doc_ref = db.collection(user_ID).document(document_id)
             doc_ref.set(data, merge=True)
             logging.info(
                 f"Document {document_id} merged in collection {'data'}"
@@ -105,10 +104,10 @@ class FireStore:
             )
             raise
 
-    def read_document(document_id: str) -> Optional[dict]:
+    def read_document(user_ID: str, document_id: str) -> Optional[dict]:
         try:
             doc_ref = (
-                db.collection('data').document(document_id)
+                db.collection(user_ID).document(document_id)
             )
             doc = doc_ref.get()
             if doc.exists:
@@ -127,9 +126,9 @@ class FireStore:
             )
             raise
 
-    def update_document(document_id: str, data: dict) -> None:
+    def update_document(user_ID: str, document_id: str, data: dict) -> None:
         try:
-            doc_ref = db.collection('data').document(document_id)
+            doc_ref = db.collection(user_ID).document(document_id)
             doc_ref.update(data)
             logging.info(
                 f"Document {document_id} updated in collection {'data'}"
@@ -140,9 +139,9 @@ class FireStore:
             )
             raise
 
-    def delete_document(document_id: str) -> None:
+    def delete_document(user_ID: str, document_id: str) -> None:
         try:
-            doc_ref = db.collection('data').document(document_id)
+            doc_ref = db.collection(user_ID).document(document_id)
             doc_ref.delete()
             logging.info(
                 f"Document {document_id} deleted from collection {'data'}"
