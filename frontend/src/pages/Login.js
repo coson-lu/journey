@@ -23,7 +23,6 @@ function Login() {
   const navigate = useNavigate();
   const auth = getAuth();
 
-  // Check if user is already logged in
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -34,17 +33,15 @@ function Login() {
     return () => unsubscribe();
   }, [auth, navigate]);
 
-  // Function to handle Google Login
   const googleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       console.log("User logged in:", user);
-      navigate('/'); // Redirect to home page after successful login
+      navigate('/');
     } catch (error) {
       console.error("Error during sign-in:", error);
-      alert("Something went wrong. Please try again.");
     }
   };
 
