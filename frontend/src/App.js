@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Nav from "./Nav";
 import './nav.css';
 import './App.css';
+import Loading from './Loading';
 
 // Protected Route wrapper component
 const ProtectedRoute = ({ children }) => {
@@ -24,7 +25,7 @@ const ProtectedRoute = ({ children }) => {
   }, [auth]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading></Loading>
   }
 
   if (!user) {

@@ -1,0 +1,26 @@
+#loading-dark-container {
+  position: fixed;  /* Change to 'fixed' to ensure it stays centered even when scrolling */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Optional dark background to cover content */
+  z-index: 9999; /* Ensure it appears on top of other content */
+}
+
+.loader {
+  border: 8px solid #f3f3f300; /* Transparent border */
+  border-top: 8px solid #3498db; /* Blue color for the top border */
+  border-radius: 50%;
+  width: 8vw; /* Dynamic size based on viewport width */
+  height: 8vw; /* Dynamic size based on viewport width */
+  animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

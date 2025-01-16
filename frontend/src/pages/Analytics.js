@@ -4,6 +4,7 @@ import axios from "axios";
 import './analytics.css'
 import HeatMap from '@uiw/react-heat-map';
 import ApiService from "../Api";
+import Loading from '../Loading';
 
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -134,6 +135,7 @@ let displayPiChart = (d) => {
       type: 'pie',
       height: '75%',
       backgroundColor: 'rgb(18, 18, 18, 0)',
+      reflow: true
     },
     title: {
       text: 'Activities Pie Chart',
@@ -200,14 +202,18 @@ function Analytics() {
   let [timeFrame, setTimeFrame] = useState('week')
   let [timeBack, setTimeBack] = useState(0)
   let [activeButton, setActiveButton] = useState(1)
+  let [loading, setLoading] = useState(false)
   // let [heatBack, setHeatBack] = useState(0)
 
   const fetchAllActivities = async () => {
+    setLoading(true)
     try {
       const data = await ApiService.getAllData();
       await setAllData(data)
     } catch (error) {
       console.error("Error fetching problems:", error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -274,19 +280,21 @@ onClick={() => {
           }}>Year</button>
         </div>
         <div className='charts'>
-          {time_frames[timeFrame](allData, timeBack)['data'].some(x => x != null) ? (
-            <div id='pi-chart-container'>
-              <div id="pi-chart"></div>
-            </div>
+          {loading ? (
+            <Loading></Loading>
           ) : (
-            <h3>No data for this {timeFrame}!</h3>
+            time_frames[timeFrame](allData, timeBack)['data'].some(x => x != null) ? (
+              <div id='pi-chart-container'>
+                <div id="pi-chart"></div>
+              </div>
+            ) : (
+              <h3>No data for this {timeFrame}!</h3>
+            )
           )}
+          
         </div>
         <div className='empty'></div>
       </div>
-    </section>
-    <section>
-      <h1>test</h1>
     </section>
     {/* use <section> tag to create more sections */}
     </>

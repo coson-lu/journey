@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for, render_template, flash, jsonify
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from Firestore import FireStore
 from functools import wraps
@@ -18,11 +18,8 @@ def require_auth(f):
             return jsonify({'error': 'No authorization token provided'}), 401
         
         try:
-            # Remove 'Bearer ' from token
             id_token = auth_header.split(' ')[1]
-            # Verify the token
             decoded_token = auth.verify_id_token(id_token)
-            # Add user_id to request context
             request.user_id = decoded_token['uid']
             return f(*args, **kwargs)
         except Exception as e:
@@ -37,8 +34,8 @@ current_date = f'{int(m)}-{d}-{y}'
 @app.route('/current')
 @require_auth
 def current():
-    user_id = request.user_id  # Access the authenticated user's ID
-    current_data = FireStore.read_document(user_id, current_date)  # Pass user_id to your database queries
+    user_id = request.user_id
+    current_data = FireStore.read_document(user_id, current_date)
     
     if current_data:
         return current_data
@@ -58,5 +55,14 @@ def update_db():
 @require_auth
 def get_all_data():
     user_id = request.user_id
-    all_data = FireStore.stream_collection(user_id)  # Pass user_id to get only this user's data
+    all_data = FireStore.stream_collection(user_id)
     return all_data
+
+@app.route('/fdelete', methods=['DELETE'])
+@require_auth
+def delete_field():
+    user_id = request.user_id
+    activity = request.form['activity']
+    FireStore.delete_field(user_id, current_date, activity)
+    return {}, 200
+

@@ -151,3 +151,20 @@ class FireStore:
                 f"An error occurred during document deletion: {e}", exc_info=True
             )
             raise
+
+    def delete_field(user_ID, document_id, field) -> None:
+        try:
+            doc_ref = db.collection(user_ID).document(document_id)
+
+            doc_ref.update({
+                field: firestore.DELETE_FIELD
+            })
+
+            logging.info(
+                f"Field has successfully been deleted from {document_id}"
+            )
+        except Exception as e:
+            logging.error(
+                f"An error occurred during field deletion: {e}", exc_info=True
+            )
+            raise

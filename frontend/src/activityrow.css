@@ -8,6 +8,18 @@
 
 #activity, #duration {
   font-size: 16px;
-  padding-right: 20px;
-  padding-left: 20px;
+  padding-right: 25px;
+  padding-left: 25px;
+}
+
+#trash {
+  visibility: hidden;
+  position: absolute;
+  left: -3px;
+  transform: translateY(-5px);
+  cursor: pointer;
+}
+
+.row-container:hover #trash {
+  visibility: visible;
 }

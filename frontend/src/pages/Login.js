@@ -38,7 +38,6 @@ function Login() {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      console.log("User logged in:", user);
       navigate('/');
     } catch (error) {
       console.error("Error during sign-in:", error);

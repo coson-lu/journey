@@ -49,6 +49,25 @@ class ApiService {
     return response.json();
   }
 
+  static async deleteData(activity) {
+    const headers = await this.getAuthHeader(true);
+    const formData = new FormData();
+    formData.append('activity', activity);
+
+    const response = await fetch(`${baseUrl}/fdelete`, {
+      method: 'DELETE',
+      headers,
+      body: formData
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to update data');
+    }
+    
+    return response.json();
+  }
+
   static async getAllData() {
     const headers = await this.getAuthHeader();
     const response = await fetch(`${baseUrl}/all`, {

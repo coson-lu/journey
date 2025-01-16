@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import ActivityRow from "../ActivityRow";
 import './home.css';
 import ApiService from "../Api";
+import Loading from "../Loading";
 
 function Home() {
   const inputRef = useRef(null);
@@ -56,24 +57,31 @@ function Home() {
             <div id='accomplishments-container'>
               <h1 id='accomplishments-header'>Today's <span style={{ color: '#48A3FF', textShadow: '0 0 7px #48A3FF' }}>Accomplishments</span></h1>
             </div>
-            <div id='activities-header'>
-              <h2 id='activity-name'>Activity</h2>
-              <h2 id='activity-duration'>Duration</h2>
+            <div id='activity-duration-scroll'>
+              <div id='activities-header'>
+                <h2 id='activity-name'>Activity</h2>
+                <h2 id='activity-duration'>Duration</h2>
+              </div>
+              <div id='activity-scroll-control'>
+                {loading &&
+                  <>
+                    <Loading></Loading>
+                  </>
+                }
+                {
+                  activities.map((act, index) => (
+                    <ActivityRow
+                      key={index}
+                      activity={act['activity']}
+                      duration={act['duration']}
+                      color={index}
+                      fetchActivities={fetchActivities}
+                      />
+                  ))
+                }
+              </div>
             </div>
-            <div id='activity-scroll-control'>
-              {loading &&
-                <>
-                  <div className="loader-container">
-                    <div className='loading loader'></div>
-                  </div>
-                </>
-              }
-              {
-                activities.map((act, index) => (
-                  <ActivityRow key={index} activity={act['activity']} duration={act['duration']} color={index} />
-                ))
-              }
-            </div>
+            
           </div>
         </div>
         <div id='form-container'>
