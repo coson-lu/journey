@@ -30,6 +30,8 @@ function Home() {
   };
 
   useEffect(() => {
+    document.title = 'Home | Journey';
+    
     fetchActivities();
     inputRef.current.focus();
   }, []);
@@ -81,7 +83,6 @@ function Home() {
                 }
               </div>
             </div>
-            
           </div>
         </div>
         <div id='form-container'>

@@ -9,15 +9,14 @@ import './nav.css';
 import './App.css';
 import Loading from './Loading';
 
-// Protected Route wrapper component
 const ProtectedRoute = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const auth = getAuth();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
       setLoading(false);
     });
 
@@ -56,7 +55,9 @@ function App() {
           </ProtectedRoute>
         } 
       />
-      <Route path="/login" element={<Login />} />
+      <Route exact path="/login" element={<Login />} />
+
+      <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );
 }

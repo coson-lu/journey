@@ -222,6 +222,7 @@ function Analytics() {
   }
 
   useEffect(() => {
+    document.title = 'Analytics | Journey';
     fetchAllActivities();
   }, []);
 
@@ -246,7 +247,9 @@ function Analytics() {
       <div className='time-row'>
         <h3 className='backButton' title='Back' onClick={() => {
           setTimeBack(timeBack + 1)
-        }}>🡸</h3>
+        }}><span class="material-symbols-outlined">
+chevron_left
+</span></h3>
 
         <h3>{time_frames[timeFrame](allData, timeBack)['message']}</h3>
 
@@ -255,7 +258,9 @@ function Analytics() {
         ) : (
           <h3 className='backButton' title='Forward' onClick={() => {
             setTimeBack(timeBack - 1)
-          }}>🡺</h3>
+          }}><span class="material-symbols-outlined">
+chevron_right
+</span></h3>
         )}
       </div>
       <div className='flex-container'>

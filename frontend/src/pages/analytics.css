@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: center;
   gap: 30px;
-  align-items: end;
+  align-items: center;
   height: 13vh;
 }
 
@@ -108,6 +108,11 @@ section {
   height: calc(100vh - 70px);
   scroll-snap-align: start;
   scroll-snap-stop: always;
+}
+
+.material-symbols-outlined {
+  transform: translateY(1.5px);
+  text-align: center;
 }
 
 /* Heat Map */
